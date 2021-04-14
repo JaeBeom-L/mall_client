@@ -26,6 +26,7 @@ if(session.getAttribute("loginClient") == null){
 			<%=((String)(session.getAttribute("loginClient")))%>님 반갑습니다.
 		</div>
 		<ul>
+			<li><a href="<%=request.getContextPath()%>/IndexController">홈으로</a>
 			<li><a href="<%=request.getContextPath()%>/LogoutController">로그아웃</a></li>
 			<!-- ClientOneController -> ClientDao.selectclientOne() -> /view/client/clientOne.jsp-->
 			<li><a href="<%=request.getContextPath()%>/ClientOneController">회원정보</a></li>

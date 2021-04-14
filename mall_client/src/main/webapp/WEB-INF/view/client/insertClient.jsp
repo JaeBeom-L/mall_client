@@ -10,14 +10,14 @@
 	<form action="<%=request.getContextPath()%>/InsertClientController" method="post">
 		<table border="1">
 			<tr>
-				<td>clientMail</td>
+				<td>clientMail</td><!-- 고객 이메일 -->
 				<td>
 					<input type="text" name="clientMail">
 				</td>
 			</tr>
 			
 			<tr>
-				<td>clientPw</td>
+				<td>clientPw</td><!-- 고객 비밀번호 -->
 				<td>
 					<input type="password" name="clientPw">
 				</td>

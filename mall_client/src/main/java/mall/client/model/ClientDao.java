@@ -8,7 +8,7 @@ public class ClientDao {
 	private DBUtil dbutil;
 	
 	// 고객 정보 출력 메서드
-	public Client clientOne(String clientMail) {
+	public Client selectClientOne(String clientMail) {
 		this.dbutil = new DBUtil();
 		Client client = new Client();
 		Connection conn = null;
@@ -16,7 +16,7 @@ public class ClientDao {
 		ResultSet rs = null;
 		try {
 			conn = this.dbutil.getConnectioin();
-			String sql = "SELECT client_no clientNo, client_email clientMail, client_date clientDate FROM client WHERE client_email = ?";
+			String sql = "SELECT client_no clientNo, client_email clientMail, client_date clientDate FROM client WHERE client_email = ?"; // 이메일에 맞는 고객정보를 검색하는 쿼리
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, clientMail);
 			System.out.println(stmt+"고객 정보 출력 메서드");//디버깅코드
@@ -29,7 +29,7 @@ public class ClientDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			this.dbutil.close(conn, stmt, null);
+			this.dbutil.close(conn, stmt, rs); // 작업후 db자원을 반환한다.
 		}
 		
 		return client;
@@ -43,7 +43,7 @@ public class ClientDao {
 		PreparedStatement stmt = null;
 		try {
 			conn = this.dbutil.getConnectioin();
-			String sql = "INSERT INTO client(client_email, client_pw, client_date) VALUES(?,PASSWORD(?),NOW())";
+			String sql = "INSERT INTO client(client_email, client_pw, client_date) VALUES(?,PASSWORD(?),NOW())"; // 회원가입 db에 고객 정보를 등록하는 쿼리
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, client.getClientEmail());
 			stmt.setString(2, client.getClientPw());
@@ -52,7 +52,7 @@ public class ClientDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			this.dbutil.close(conn, stmt, null);
+			this.dbutil.close(conn, stmt, null); // 작업후 db자원을 반환한다.
 		}	
 	}
 	
@@ -66,7 +66,7 @@ public class ClientDao {
 
 		try {
 			conn = this.dbutil.getConnectioin();
-			String sql = "SELECT client_email FROM client WHERE client_email=?";
+			String sql = "SELECT client_email FROM client WHERE client_email=?"; // 중복검사를 위해 받아온파라미터(이메일)과 db의 email정보들과 비교 값이 나오면 중복
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, clientMail);
 			rs = stmt.executeQuery();
@@ -78,7 +78,7 @@ public class ClientDao {
 		} catch(Exception e){
 			e.printStackTrace();
 		} finally {
-			this.dbutil.close(conn, stmt, rs);
+			this.dbutil.close(conn, stmt, rs);// 작업후 db자원을 반환한다.
 		}
 
 		return returnClientMail;

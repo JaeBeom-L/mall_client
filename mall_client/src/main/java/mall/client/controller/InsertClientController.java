@@ -12,8 +12,8 @@ import mall.client.model.ClientDao;
 import mall.client.vo.Client;
 
 @WebServlet("/InsertClientController")
-public class InsertClientController extends HttpServlet {
-	private ClientDao clientDao;
+public class InsertClientController extends HttpServlet {// 회원정보페이지로 이동하는 서블릿
+	private ClientDao clientDao; 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginClient") != null) {
@@ -22,7 +22,7 @@ public class InsertClientController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/client/insertClient.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {// 회원가입을 통해 고객 정보를 등록하는 서블릿
 		this.clientDao = new ClientDao();		
 		//중복 검사
 		request.setCharacterEncoding("UTF-8");
