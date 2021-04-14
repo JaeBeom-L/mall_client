@@ -14,24 +14,29 @@ public class DBUtil {
 		}
 		return conn;
 	}
-	//2. db자원(connection, statement, resultset) 해제 (나중에 생성된 순서부터 먼저 삭제)
+	//2. db자원(connection, statement, resultset) 해제 (나중에 생성된 순서부터 먼저 삭제) null이 아닐떄
 	public void close(Connection conn, PreparedStatement stmt, ResultSet rs) {
-		try {
-			rs.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if(stmt != null) {
+			try {
+				stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
 		}
 		
-		try {
-			stmt.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			conn.close();
-		} catch (Exception e) {			
-			e.printStackTrace();
+		if(conn != null) {
+			try {
+				conn.close();
+			} catch (Exception e) {			
+				e.printStackTrace();
+			}
 		}
 	}
 }
