@@ -23,7 +23,7 @@
 		
 		<tr>
 			<td>clientMail</td>
-			<td><%=client.getClientEmail() %></td>
+			<td><%=client.getClientMail() %></td>
 		</tr>
 		
 		<tr>
@@ -32,8 +32,10 @@
 		</tr>
 	</table>
 	
-	<a href="#">정보수정</a>
-	<a href="#">회원탈퇴</a>
-	
+	<!-- UpdateClientPasswordController.doGet - updateClientPw.jsp>
+	<!-- UpdateClientPasswordController.doPost - ClientDao.updateClientPassword() - redirect:/Index -->
+	<a href="<%=request.getContextPath()%>/UpdateClientPasswordController">정보수정</a>
+	<!-- DeleteClientController - ClientDao.deleteClient() - session.invalidate() -->
+	<a href="<%=request.getContextPath() %>/DeleteClientController">회원탈퇴</a>
 </body>
 </html>

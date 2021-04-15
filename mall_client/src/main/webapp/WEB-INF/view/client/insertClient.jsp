@@ -6,6 +6,10 @@
 <title>insertClient</title>
 </head>
 <body>
+	<ul>
+		<li><a href="<%=request.getContextPath()%>/IndexController">홈으로</a>
+	</ul>
+	
 	<h1>회원가입</h1>
 	<form action="<%=request.getContextPath()%>/InsertClientController" method="post">
 		<table border="1">

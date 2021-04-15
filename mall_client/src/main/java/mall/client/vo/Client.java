@@ -2,7 +2,7 @@ package mall.client.vo;
 
 public class Client {
 	private int clientNo;
-	private String clientEmail;
+	private String clientMail;
 	private String clientPw;
 	private String clientDate;
 	
@@ -12,11 +12,11 @@ public class Client {
 	public void setClientNo(int clientNo) {
 		this.clientNo = clientNo;
 	}
-	public String getClientEmail() {
-		return clientEmail;
+	public String getClientMail() {
+		return clientMail;
 	}
-	public void setClientEmail(String clientEmail) {
-		this.clientEmail = clientEmail;
+	public void setClientMail(String clientMail) {
+		this.clientMail = clientMail;
 	}
 	public String getClientPw() {
 		return clientPw;
@@ -32,7 +32,7 @@ public class Client {
 	}
 	@Override
 	public String toString() {
-		return "Client [clientNo=" + clientNo + ", clientEmail=" + clientEmail + ", clientPw=" + clientPw
+		return "Client [clientNo=" + clientNo + ", clientEmail=" + clientMail + ", clientPw=" + clientPw
 				+ ", clientDate=" + clientDate + "]";
 	}
 	

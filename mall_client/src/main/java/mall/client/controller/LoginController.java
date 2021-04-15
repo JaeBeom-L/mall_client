@@ -28,13 +28,13 @@ public class LoginController extends HttpServlet {
 		String clientMail = request.getParameter("clientMail");
 		String clientPw = request.getParameter("clientPw");
 		Client client = new Client();
-		client.setClientEmail(clientMail);
+		client.setClientMail(clientMail);
 		client.setClientPw(clientPw);
 		
 		this.clientDao = new ClientDao();
 		Client returnClient = this.clientDao.login(client); // 로그인 메서드 실행
 		if(returnClient != null) {// 로그인 메서드 실행값이 있다면 세션에 고객메일을 저장
-			session.setAttribute("loginClient", returnClient.getClientEmail());
+			session.setAttribute("loginClient", returnClient.getClientMail());
 		}
 		response.sendRedirect(request.getContextPath()+"/IndexController");// 작업 완료후 인덱스페이지로
 	}

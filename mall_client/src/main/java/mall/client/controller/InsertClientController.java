@@ -36,7 +36,7 @@ public class InsertClientController extends HttpServlet {// 회원정보페이�
 			return;
 		}
 		Client client = new Client();		
-		client.setClientEmail(clientMail);
+		client.setClientMail(clientMail);
 		client.setClientPw(clientPw);
 			
 		clientDao.insertClient(client); // 중복이 아니면 회원가입 메서드 실행

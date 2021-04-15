@@ -1,6 +1,7 @@
 package mall.client.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,15 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import mall.client.model.CartDao;
 import mall.client.model.ClientDao;
-import mall.client.vo.*;
 
-@WebServlet("/ClientOneController")
-public class ClientOneController extends HttpServlet {
+@WebServlet("/DeleteClientController")
+public class DeleteClientController extends HttpServlet {
 	private ClientDao clientDao;
+	private CartDao cartDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Client client = new Client();
-		// 로그인 유효성 검사
+		//세션 유효성 검사
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loginClient") == null) {
 			response.sendRedirect(request.getContextPath()+"/IndexController");
@@ -24,10 +25,14 @@ public class ClientOneController extends HttpServlet {
 		}
 		String clientMail = (String)session.getAttribute("loginClient"); // 세션에서 받아온 값을 문자열타입으로 clientMail에 저장 (세션을 받아 올때 email만 받아옴)
 		System.out.println(clientMail+"고객정보세션"); //디버깅코드
-		this.clientDao = new ClientDao();	// clientDao의 공간 생성
-		client = this.clientDao.selectClientOne(clientMail);//client변수에 clientMail에 맞는 Client정보들이 저장
-		System.out.println(client.toString());// 디버깅코드
-		request.setAttribute("client", client);// client를 request에 저장
-		request.getRequestDispatcher("/WEB-INF/view/client/clientOne.jsp").forward(request, response); // clientOne페이지에 requset에 저장된 값들과 함께 넘겨준다.
+		this.clientDao = new ClientDao();
+		this.cartDao = new CartDao();
+		this.cartDao.deleteCartAll(clientMail); // 장바구니 삭제 메서드 실행
+		this.clientDao.deleteClient(clientMail); // 회원정보탈퇴 메서드 실행
+		
+		response.sendRedirect(request.getContextPath()+"/LogoutController"); // 작업 완료후 세션초기화후 인덱션 페이지 이동
+		
+		
 	}
+
 }
