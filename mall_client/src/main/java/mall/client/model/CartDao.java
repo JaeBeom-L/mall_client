@@ -21,7 +21,7 @@ public class CartDao {
 			System.out.println(stmt+"장바구니 화면 삭제 메서드");
 			stmt.executeUpdate();			
 		}catch(Exception e) {
-				
+			e.printStackTrace();
 		}finally {
 			this.dbUtil.close(conn, stmt, null); // 작업후 db자원을 반환한다.
 		}
@@ -41,12 +41,13 @@ public class CartDao {
 			System.out.println(stmt+"장바구니 삭제 메서드");
 			stmt.executeUpdate();			
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}finally {
 			this.dbUtil.close(conn, stmt, null); // 작업후 db자원을 반환한다.
 		}
 	}
 	
+	// 장바구니 물품 중복 확인 메서드
 	public boolean selectClientMail(Cart cart) {	
 		boolean flag = true;
 		this.dbUtil = new DBUtil();

@@ -6,10 +6,34 @@ import java.util.*;
 import mall.client.commons.DBUtil;
 
 
-public class EbookDao {
+public class EbookDao {	
 	// db연결 클래스 초기화
 	private DBUtil dbUtil;
 	
+	// db총 ebook 자료 수 구하는 메서드
+	public int totalRow() {
+		int totalRow = 0;
+		this.dbUtil = new DBUtil();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = this.dbUtil.getConnectioin();
+			String sql = "SELECT COUNT(*) FROM ebook";
+			stmt = conn.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				totalRow = rs.getInt("COUNT(*)");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			dbUtil.close(conn, stmt, rs);
+		}		
+		return totalRow;
+	}
+	
+	// 책정보출력 메서드
 	public Ebook selectEbookOne(int ebookNo) {
 		Ebook ebook = null;
 		this.dbUtil = new DBUtil();

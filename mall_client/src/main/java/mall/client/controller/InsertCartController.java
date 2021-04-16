@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import mall.client.model.CartDao;
 import mall.client.vo.Cart;
+import mall.client.vo.Client;
 
 @WebServlet("/InsertCartController")
 public class InsertCartController extends HttpServlet {
@@ -26,7 +27,7 @@ public class InsertCartController extends HttpServlet {
 		this.cartDao = new CartDao();
 		Cart cart = new Cart();
 		cart.setEbookNo(ebookNo); //선택한 책 번호를 담는다.
-		cart.setClientMail((String)session.getAttribute("loginClient")); // 세션 정보를 담는다 세션엔 (로그인 이메일이 담겨있음)
+		cart.setClientMail(((Client)(session.getAttribute("loginClient"))).getClientMail()); // 세션 정보를 담는다 세션엔 (로그인 이메일이 담겨있음)
 		System.out.println(cart.toString());	// 디버깅 코드
 		if(this.cartDao.selectClientMail(cart)) {
 			this.cartDao.insertCart(cart);// 장바구니 추가 메서드 실행

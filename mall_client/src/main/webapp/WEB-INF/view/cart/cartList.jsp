@@ -39,14 +39,11 @@
 					<!-- DeleteCartController - CartDao.deleteCart() - redirect CartListController -->
 					<td><a href="<%=request.getContextPath()%>/DeleteCartController?cartNo=<%=map.get("cartNo")%>">삭제</a></td>
 					<!-- InsertOrdersController - insertOrders(),deleteCart():issue(트랙잭션 필요)- redirect OrdersListController -->
-					<td><a href="">주문</a></td>
+					<td><a href="<%=request.getContextPath()%>/InsertOrdersController?ebookNo=<%=map.get("ebookNo")%>&cartNo=<%=map.get("cartNo")%>">주문</a></td>
 				</tr>
-		<%
-		
+		<%	
 			}
-		%>
-		
-		
+		%>		
 	</table>
 
 </body>

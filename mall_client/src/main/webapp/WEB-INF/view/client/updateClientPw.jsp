@@ -8,7 +8,7 @@
 </head>
 <body>
 <%
-	String clientMail = (String)session.getAttribute("loginClient");
+	String clientMail = ((Client)(session.getAttribute("loginClient"))).getClientMail();
 %>
 	
 	<jsp:include page="/WEB-INF/view/inc/mainMenu.jsp"></jsp:include>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import mall.client.model.CartDao;
 import mall.client.model.ClientDao;
+import mall.client.vo.Client;
 
 @WebServlet("/DeleteClientController")
 public class DeleteClientController extends HttpServlet {
@@ -23,7 +24,7 @@ public class DeleteClientController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/IndexController");
 			return;
 		}
-		String clientMail = (String)session.getAttribute("loginClient"); // 세션에서 받아온 값을 문자열타입으로 clientMail에 저장 (세션을 받아 올때 email만 받아옴)
+		String clientMail = ((Client)(session.getAttribute("loginClient"))).getClientMail(); // 세션에서 받아온 값을 문자열타입으로 clientMail에 저장 (세션을 받아 올때 email만 받아옴)
 		System.out.println(clientMail+"고객정보세션"); //디버깅코드
 		this.clientDao = new ClientDao();
 		this.cartDao = new CartDao();

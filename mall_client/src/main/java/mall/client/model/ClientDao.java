@@ -21,7 +21,7 @@ public class ClientDao {
 			System.out.println(stmt+"회원비번수정메서드");
 			stmt.executeUpdate();			
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}finally {
 			this.dbUtil.close(conn, stmt, null); // 작업후 db자원을 반환한다.
 		}
@@ -42,7 +42,7 @@ public class ClientDao {
 			System.out.println(stmt+"회원탈퇴메서드");
 			stmt.executeUpdate();			
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}finally {
 			this.dbUtil.close(conn, stmt, null); // 작업후 db자원을 반환한다.
 		}
@@ -134,7 +134,7 @@ public class ClientDao {
 		ResultSet rs = null;
 		try {
 			conn = this.dbUtil.getConnectioin();
-			String sql = "SELECT client_email clientMail FROM client WHERE client_email=? AND client_pw=PASSWORD(?)";// 이메일(유니크)과 패스워드에 맞는 정보 출력
+			String sql = "SELECT client_no clientNo, client_email clientMail FROM client WHERE client_email=? AND client_pw=PASSWORD(?)";// 이메일(유니크)과 패스워드에 맞는 정보 출력
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1,client.getClientMail());
 			stmt.setString(2, client.getClientPw());
@@ -143,6 +143,7 @@ public class ClientDao {
 			if(rs.next()) {
 				returnClient = new Client();
 				returnClient.setClientMail(rs.getString("clientMail"));
+				returnClient.setClientNo(rs.getInt("clientNo"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();// 예외 발생시 콘솔에 오류 출력

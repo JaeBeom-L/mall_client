@@ -31,7 +31,7 @@ public class UpdateClientPasswordController extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/IndexController");
 			return;
 		}
-		String clientMail = (String)session.getAttribute("loginClient"); // 세션값을 고객 이메일로 설정 강제 타입변환 해준다.
+		String clientMail = ((Client)(session.getAttribute("loginClient"))).getClientMail(); // 세션값을 고객 이메일로 설정 강제 타입변환 해준다.
 		Client client = new Client();
 		client.setClientMail(clientMail);
 		client.setClientPw(request.getParameter("clientPw"));// 비밀번호 수정페이지에서 받아온 파라미터를 저장

@@ -34,7 +34,7 @@ public class LoginController extends HttpServlet {
 		this.clientDao = new ClientDao();
 		Client returnClient = this.clientDao.login(client); // 로그인 메서드 실행
 		if(returnClient != null) {// 로그인 메서드 실행값이 있다면 세션에 고객메일을 저장
-			session.setAttribute("loginClient", returnClient.getClientMail());
+			session.setAttribute("loginClient", returnClient);
 		}
 		response.sendRedirect(request.getContextPath()+"/IndexController");// 작업 완료후 인덱스페이지로
 	}
