@@ -39,11 +39,12 @@
 		System.out.println(lastPage+"마지막 페이지");
 		
 		//카테고리 이름
-		String categoryName = null;
-		if(request.getAttribute("categoryName") != null){
-			categoryName = (String)request.getAttribute("categoryName");
-		}
+		String	categoryName = (String)request.getAttribute("categoryName");		
 		System.out.println(categoryName+"카테고리 이름");
+		
+		//검색단어		
+		String searchWord = (String)request.getAttribute("searchWord");
+		System.out.println(searchWord+"검색 단어");
 				
 	%>
 	<!-- 카테고리 -->
@@ -88,7 +89,7 @@
 		</tr>
 	</table>
 	<div><!--  검색창 -->
-		<form method="post" action="<%=request.getContextPath()%>/IndexController">
+		<form action="<%=request.getContextPath()%>/IndexController" method="get">
 			검색 : <input type="text" name="searchWord">
 			<button type="submit">검색</button>
 		</form>
@@ -98,45 +99,45 @@
 		<%
 			if((currentPage-1)/10 == lastPage/10){ // 10페이지씩 마지막 부분일 때 다음버튼이 없다
 		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10-1)*10+1 %> ">이전</a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10-1)*10+1 %>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%> ">이전</a>
 		<%
 				for(int j=((currentPage-1)/10)*10+1; j<=lastPage; j++){
 		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%> "><%=j%></a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  "><%=j%></a>
 		<%
 				}
 			}else if(currentPage==1){ // 현재 페이지가 1이라면 이전버튼을 없앤다
 				for(int j=((currentPage-1)/10)*10+1; j<=((currentPage-1)/10)*10+10; j++){
 		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%> "><%=j%></a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  "><%=j%></a>
 		<%
 				}
 		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10+1)*10+1 %> ">다음</a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10+1)*10+1 %>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  ">다음</a>
 		<%
 			}else if((currentPage-1)/10<1){ // 10페이지씩 1~10페이지일 때
 		%>	
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=1%> ">이전</a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=1%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  ">이전</a>
 		<%		
 				for(int j=((currentPage-1)/10)*10+1; j<=((currentPage-1)/10)*10+10; j++){	
 		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%> "><%=j%></a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  "><%=j%></a>
 		<%
 				}
 		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10+1)*10+1 %> ">다음</a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10+1)*10+1 %>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%> ">다음</a>
 		<%
 			}else{ // 11페이지부터 ~ 마지막 페이지 부분 블럭 전까지
 		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10-1)*10+1 %> ">이전</a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10-1)*10+1 %>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  ">이전</a>
 		<%	
 				for(int j=((currentPage-1)/10)*10+1; j<=((currentPage-1)/10)*10+10; j++){	
 		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%> "><%=j%></a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  "><%=j%></a>
 		<%
 				}
 		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10+1)*10+1 %> ">다음</a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10+1)*10+1 %>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  ">다음</a>
 		<%
 			}					
 		%>
