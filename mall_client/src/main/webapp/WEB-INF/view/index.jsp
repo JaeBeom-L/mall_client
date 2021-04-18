@@ -97,36 +97,37 @@
 	</div>
 	<div><!-- 10단위 페이징-->
 		<%
-			if((currentPage-1)/10 == lastPage/10){ // 10페이지씩 마지막 부분일 때 다음버튼이 없다
-		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10-1)*10+1 %>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%> ">이전</a>
-		<%
-				for(int j=((currentPage-1)/10)*10+1; j<=lastPage; j++){
-		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  "><%=j%></a>
-		<%
-				}
-			}else if(currentPage==1){ // 현재 페이지가 1이라면 이전버튼을 없앤다
+			if(currentPage == 1 && totalRow>rowPerPage){ // 현재 페이지가 1이라면 이전버튼을 없앤다
 				for(int j=((currentPage-1)/10)*10+1; j<=((currentPage-1)/10)*10+10; j++){
 		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  "><%=j%></a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>"><%=j%></a>
 		<%
 				}
 		%>
 					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10+1)*10+1 %>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  ">다음</a>
 		<%
-			}else if((currentPage-1)/10<1){ // 10페이지씩 1~10페이지일 때
-		%>	
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=1%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  ">이전</a>
-		<%		
+			}else if(totalRow<rowPerPage){ // 1페이지에서 총 게시물 수가 rowPerPage보다 작을 때
+		%>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=1%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>"><%=1%></a>
+		<%
+			}else if((currentPage-1)/10<1){ // 10페이지씩 1~10페이지일 때	
 				for(int j=((currentPage-1)/10)*10+1; j<=((currentPage-1)/10)*10+10; j++){	
 		%>
-					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  "><%=j%></a>
+					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>"><%=j%></a>
 		<%
 				}
 		%>
 					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10+1)*10+1 %>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%> ">다음</a>
 		<%
+			}else if((currentPage-1)/10 == lastPage/10){ // 10페이지씩 마지막 부분일 때 다음버튼이 없다
+				%>
+							<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10-1)*10+1 %>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%> ">이전</a>
+				<%
+						for(int j=((currentPage-1)/10)*10+1; j<=lastPage; j++){
+				%>
+							<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=j%>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  "><%=j%></a>
+				<%
+						}
 			}else{ // 11페이지부터 ~ 마지막 페이지 부분 블럭 전까지
 		%>
 					<a href="<%=request.getContextPath()%>/IndexController?currentPage=<%=((currentPage-1)/10-1)*10+1 %>&categoryName=<%=categoryName%>&searchWord=<%=searchWord%>  ">이전</a>

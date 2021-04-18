@@ -30,19 +30,19 @@ public class IndexController extends HttpServlet {
 		int beginRow = (currentPage -1) * rowPerPage;
 		request.setCharacterEncoding("UTF-8");// 받아온 파라미터값 인코딩을 utf-8로 설정
 		// 카테고리 선택
-		String categoryName = null;
+		String categoryName = null; // 문자열 null이 넘어올 경우 진짜 null로 변경
 		if(request.getParameter("categoryName") != null ) {
 			categoryName = request.getParameter("categoryName");				
-			if(request.getParameter("categoryName").equals("null")) { // 문자열 null이 넘어올 경우 진짜 null로 변경
+			if(request.getParameter("categoryName").equals("null")) { 
 				categoryName = null;
 			}					
 		}
 				
-		// 검색
-		String searchWord = null;
+		// 검색단어
+		String searchWord = null; // 문자열 null이 넘어올 경우 진짜 null로 변경
 		if(request.getParameter("searchWord") != null) {
 			searchWord = request.getParameter("searchWord");					
-			if(request.getParameter("searchWord").equals("null")) { // 문자열 null이 넘어올 경우 진짜 null로 변경
+			if(request.getParameter("searchWord").equals("null")) { 
 				searchWord = null;
 			}
 		}
@@ -59,8 +59,8 @@ public class IndexController extends HttpServlet {
 		// View forward
 		request.setAttribute("ebookList", ebookList); //request에 "ebookList"라는 이름으로 ebookList를 저장
 		request.setAttribute("totalRow", totalRow); // request에 총 행의 수를 저장
-		request.setAttribute("categoryList", categoryList);
-		request.setAttribute("searchWord",searchWord);
+		request.setAttribute("categoryList", categoryList); // request에 카테고리리스트 저장
+		request.setAttribute("searchWord",searchWord); 	// request에 검색단어 저장
 		request.setAttribute("categoryName", categoryName); // categoryName 저장
 		request.setAttribute("rowPerPage", rowPerPage); // request에 rowPerPage 저장
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/view/index.jsp");//dispatcher객체에 request의 데이터와 보낼 곳(index페이지)를 지정

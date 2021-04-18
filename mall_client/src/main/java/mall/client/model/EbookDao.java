@@ -20,14 +20,14 @@ public class EbookDao {
 		ResultSet rs = null;
 		try {
 			conn = this.dbUtil.getConnectioin();
-			if(categoryName == null & searchWord == null) {
+			if(categoryName == null & searchWord == null) { // 전체보기
 				String sql = "SELECT COUNT(*) FROM ebook";
 				stmt = conn.prepareStatement(sql);
-			}else if(searchWord == null){
+			}else if(searchWord == null){// 카테고리 선택 시
 				String sql = "SELECT COUNT(*) FROM ebook WHERE category_name=?";
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, categoryName);
-			}else {
+			}else {// 검색단어를 찾을 때
 				String sql = "SELECT COUNT(*) FROM ebook WHERE ebook_title LIKE ?";
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, "%"+searchWord+"%");
