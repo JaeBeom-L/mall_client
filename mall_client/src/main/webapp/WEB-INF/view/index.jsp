@@ -47,6 +47,32 @@
 		System.out.println(searchWord+"검색 단어");
 				
 	%>
+	<!-- 베스트 셀러 -->
+	<div>
+		<h3>Best Ebook</h3>
+		<table border="1">
+			<tr>
+				<%
+					List<Map<String, Object>> bestOrdersList = (List<Map<String, Object>>)request.getAttribute("bestOrdersList");
+					for(Map m : bestOrdersList){
+				%>
+						<td>
+							<div><img src="<%=request.getContextPath()%>/img/default.jpg"></div>
+							<!-- EbookOneController -EbookDao.selectEbookOne() - ebookOne.jsp -->
+							<div>
+								<a href="<%=request.getContextPath()%>/EbookOneController?ebookNo=<%=m.get("ebookNo")%>">
+									<%=m.get("ebookTitle")%>
+								</a>
+							</div>
+							<div><%=m.get("ebookPrice")%></div>
+						</td>
+				<%
+					}
+				%>
+			</tr>
+		</table>
+	</div>
+	<br>
 	<!-- 카테고리 -->
 	<div>
 		<a href="<%=request.getContextPath() %>/IndexController">전체보기</a>

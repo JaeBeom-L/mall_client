@@ -10,7 +10,36 @@ public class EbookDao {
 	// db연결 클래스 초기화
 	private DBUtil dbUtil;
 	
-	
+	public List<Map<String, Object>> selectEbookListByDay(int year, int month){
+		List<Map<String, Object>> list = new ArrayList<>();
+		this.dbUtil = new DBUtil();		
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			conn = this.dbUtil.getConnectioin();
+			String sql = "SELECT ebook_no ebookNo, ebook_title ebookTitle, day(ebook_date) d FROM ebook WHERE YEAR(ebook_date) = ? AND MONTH(ebook_date)=? ORDER BY day(ebook_date) ASC";
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, year);
+			stmt.setInt(2, month);
+			
+			System.out.println(stmt+"월별 EBOOK 출력");
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map map = new HashMap<>();
+				map.put("ebookNo", rs.getInt("ebookNo"));
+				map.put("ebookTitle", rs.getString("ebookTitle"));
+				map.put("d", rs.getInt("d"));
+				list.add(map);
+			}
+		} catch (Exception e) {			
+			e.printStackTrace();
+		} finally {// try문에도 입력하고 catch문에도 공통으로 입력해야하는 부분을 finally 블럭에 선언 db자원들을 해제한다.
+			dbUtil.close(conn, stmt, rs);
+		}
+				
+		return list;		
+	}
 	// db총 ebook 자료 수 구하는 메서드
 	public int totalRow(String categoryName, String searchWord) {
 		int totalRow = 0;
