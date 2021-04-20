@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "mall.client.vo.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +7,7 @@
 <title>clientOne</title>
 </head>
 <body>
-<%
-	Client client = (Client)request.getAttribute("client"); // ClientOneController에서 받아온 client 번호, 이메일, 가입날짜가 들어 있다.
-%>
-	
+
 	<jsp:include page="/WEB-INF/view/inc/mainMenu.jsp"></jsp:include>
 	<!-- 메뉴1 -->
 	
@@ -18,24 +15,24 @@
 	<table border="1">
 		<tr>
 			<td>clientNo</td>
-			<td><%=client.getClientNo() %></td>
+			<td>${client.clientNo}</td>
 		</tr>
 		
 		<tr>
 			<td>clientMail</td>
-			<td><%=client.getClientMail() %></td>
+			<td>${client.clientMail}</td>
 		</tr>
 		
 		<tr>
 			<td>clientDate</td>
-			<td><%=client.getClientDate() %></td>
+			<td>${client.clientDate}</td>
 		</tr>
 	</table>
 	
 	<!-- UpdateClientPasswordController.doGet - updateClientPw.jsp>
 	<!-- UpdateClientPasswordController.doPost - ClientDao.updateClientPassword() - redirect:/Index -->
-	<a href="<%=request.getContextPath()%>/UpdateClientPasswordController">정보수정</a>
+	<a href="${pageContext.request.contextPath}/UpdateClientPasswordController">정보수정</a>
 	<!-- DeleteClientController - ClientDao.deleteClient() - session.invalidate() -->
-	<a href="<%=request.getContextPath() %>/DeleteClientController">회원탈퇴</a>
+	<a href="${pageContext.request.contextPath}/DeleteClientController">회원탈퇴</a>
 </body>
 </html>

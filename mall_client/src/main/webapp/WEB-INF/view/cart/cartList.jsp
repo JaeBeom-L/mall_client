@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,13 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-	// session 검사 session값이 없다면 인덱스페이지로
-	if(session.getAttribute("loginClient") == null) {
-		response.sendRedirect(request.getContextPath()+"/IndexController");
-		return;
-	}
-%>
 	<!-- mainMenu -->
 	<jsp:include page="/WEB-INF/view/inc/mainMenu.jsp"></jsp:include>
 	<!-- cartList -->
@@ -27,23 +20,19 @@
 				<th>주문</th>
 			</tr>
 		
-		<%
-			List<Map<String, Object>> list = (List<Map<String, Object>>)request.getAttribute("list");
-			for(Map<String, Object> map : list){
-		%>
+		<c:forEach var="m" items="${list}">
 				<tr>
-					<td><%=map.get("cartNo")%></td>
-					<td><%=map.get("ebookNo") %></td>
-					<td><%=map.get("ebookTitle") %></td>
-					<td><%=map.get("cartDate") %></td>
+					<td>${m.cartNo}</td>
+					<td>${m.ebookNo}</td>
+					<td>${m.ebookTitle}</td>
+					<td>${m.cartDate}</td>
 					<!-- DeleteCartController - CartDao.deleteCart() - redirect CartListController -->
-					<td><a href="<%=request.getContextPath()%>/DeleteCartController?cartNo=<%=map.get("cartNo")%>">삭제</a></td>
+					<td><a href="${pageContext.request.contextPath}/DeleteCartController?cartNo=${m.cartNo}">삭제</a></td>
 					<!-- InsertOrdersController - insertOrders(),deleteCart():issue(트랙잭션 필요)- redirect OrdersListController -->
-					<td><a href="<%=request.getContextPath()%>/InsertOrdersController?ebookNo=<%=map.get("ebookNo")%>&cartNo=<%=map.get("cartNo")%>">주문</a></td>
+					<td><a href="${pageContext.request.contextPath}/InsertOrdersController?ebookNo=${m.ebookNo}&cartNo=${m.cartNo}">주문</a></td>
 				</tr>
-		<%	
-			}
-		%>		
+		</c:forEach>
+
 	</table>
 
 </body>
