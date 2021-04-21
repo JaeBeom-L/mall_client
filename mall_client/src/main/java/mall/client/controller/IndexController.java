@@ -14,15 +14,18 @@ import javax.servlet.http.HttpServletResponse;
 import mall.client.model.CategoryDao;
 import mall.client.model.EbookDao;
 import mall.client.model.OrdersDao;
+import mall.client.model.StatsDao;
 import mall.client.vo.Ebook;
+import mall.client.vo.Stats;
 
 @WebServlet("/IndexController") // 컨트롤러에서 모델연결 그리고 뷰에 연결
 public class IndexController extends HttpServlet {
 	private EbookDao ebookDao;
 	private CategoryDao categoryDao;
 	private OrdersDao ordersDao;
+	private StatsDao statsDao;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		request.setCharacterEncoding("UTF-8");// 받아온 파라미터값 인코딩을 utf-8로 설정
+		System.out.println("/IndexController 시작");
 		// model 호출
 		this.ebookDao = new EbookDao();
 		this.categoryDao = new CategoryDao();
@@ -69,7 +72,20 @@ public class IndexController extends HttpServlet {
 		List<Ebook> ebookList = ebookDao.selectEbookListByPage(beginRow, rowPerPage, categoryName, searchWord); // 페이징한 ebookList 생성
 		List<String> categoryList = categoryDao.categoryNameList();
 		List<Map<String, Object>> bestOrdersList = ordersDao.selectBestOrdersList();
+		
+		//접속자 관련 데이터
+		this.statsDao = new StatsDao();
+		long total = this.statsDao.selectStatsTotal();
+		Stats stats = this.statsDao.selectStatsByToday();
+		long statsCount = 0;
+		if(stats != null) {
+			statsCount = stats.getStats_count();
+		}
+		
+		
 		// View forward
+		request.setAttribute("total", total);
+		request.setAttribute("statsCount", statsCount);
 		request.setAttribute("currentPageBlockNum", currentPageBlockNum);
 		request.setAttribute("lastPageBlockNum", lastPageBlockNum);
 		request.setAttribute("lastPageBlockNum1", lasPageBlockNum1);

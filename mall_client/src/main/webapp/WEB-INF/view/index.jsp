@@ -9,6 +9,10 @@
 <body>
 	<jsp:include page="/WEB-INF/view/inc/mainMenu.jsp"></jsp:include>
 	<!-- 메뉴1 -->
+	<div>
+		<div>오늘 접속자 수 : ${statsCount}</div>
+		<div>전체 접속자 수 : ${total}</div>
+	</div>
 	
 	<h1>index</h1>
 	
