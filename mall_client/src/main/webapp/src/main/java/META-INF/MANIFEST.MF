@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: org.mariadb.jdbc
+Bundle-SymbolicName: org.mariadb.jdbc
+Export-Package: org.mariadb.jdbc
+Bundle-Name: mariadb-java-client
+Bundle-Version: 2.6.2
+Bundle-Activator: org.mariadb.jdbc.internal.osgi.MariaDbActivator
+Bundle-ManifestVersion: 2
+Import-Package: org.osgi.service.jdbc,org.osgi.framework,javax.naming,
+ javax.management,javax.sql,javax.net;resolution:=optional,javax.net.s
+ sl;resolution:=optional,javax.transaction.xa;resolution:=optional,waf
+ fle.windows.auth;resolution:=optional,waffle.windows.auth.impl;resolu
+ tion:=optional
+Build-Jdk-Spec: 1.8
+Created-By: Maven Jar Plugin 3.2.0
+
