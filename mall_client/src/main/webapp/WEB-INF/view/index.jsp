@@ -4,8 +4,8 @@
 <html>
 <head>
 <title>index</title>
-   <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ 	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Rokkitt:100,300,400,700" rel="stylesheet">	
@@ -38,9 +38,28 @@
 
 </head>
 <body>
-	<div>
-		<div>오늘 접속자 수 : ${statsCount}</div>
-		<div>전체 접속자 수 : ${total}</div>
+	<div class="row">
+		<div class="col-lg-3 mb-4 text-center">
+			오늘 접속자 수 : ${statsCount}
+			전체 접속자 수 : ${total}
+		</div>
+		<div class="col-lg-6 mb-4 text-center">
+		</div>
+		<div>
+			<c:if test="${loginClient == null}">
+				<form action="${pageContext.request.contextPath}/LoginController" method="post">
+					<div class="row">
+						<div>ID :</div> 
+						<input type = "text" name = "clientMail" class="form-control">
+					</div>
+					<div class="row">
+						<div>PW :</div> 
+						<input type = "password" name = "clientPw" class="form-control">
+					</div>
+					<button type="submit" class="btn btn-primary submit-search text-center">로그인</button>
+				</form>	
+			</c:if>
+		</div>
 	</div>
 	<jsp:include page="/WEB-INF/view/inc/mainMenu.jsp"></jsp:include>
 	<!-- 메뉴1 -->
@@ -48,112 +67,167 @@
 	
 	<!-- 베스트 셀러 -->
 	<div>
-		<div class="colorlib-product">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
-						<h2>Best Sellers</h2>
-					</div>
-				</div>				
-				<div class="row row-pb-md">
-					<div class="col-lg-1 mb-4 text-center">
-					</div>
-					<c:forEach var="m" items="${bestOrdersList}">								
-						<div class="col-lg-2 mb-4 text-center">
-							<div class="product-entry border">
-								<a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${m.ebookNo}" class="prod-img">
-									<img src="${pageContext.request.contextPath}/img/default.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-								</a>
-								<div class="desc">
-									<h2><a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${m.ebookNo}">${m.ebookTitle}</a></h2>
-								</div>								
-							</div>
+		<div class="colorlib-product">			
+			<div class="row">
+				<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+					<h2>Best Sellers</h2>
+				</div>
+			</div>				
+			<div class="row row-pb-md">
+				<div class="col-lg-1 mb-4 text-center">
+				</div>
+				<c:forEach var="m" items="${bestOrdersList}">								
+					<div class="col-lg-2 mb-4 text-center">
+						<div class="product-entry border">
+							<a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${m.ebookNo}" class="prod-img">
+								<img src="${pageContext.request.contextPath}/img/default.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							</a>
+							<div class="desc">
+								<h2><a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${m.ebookNo}">${m.ebookTitle}</a></h2>
+							</div>	
 							<div>
 								<span class="price">￦ ${m.ebookPrice}</span>
-							</div>
-						</div>								
-					</c:forEach>
-					<div class="col-lg-1 mb-4 text-center">
-					</div>	
-				</div>
+							</div>							
+						</div>							
+					</div>								
+				</c:forEach>
+				<div class="col-lg-1 mb-4 text-center">
+				</div>	
 			</div>
 		</div>
 	</div>
 	<br>
-	<!-- 카테고리 -->
-	<div>
-		<a href="${pageContext.request.contextPath}/IndexController">전체보기</a>
-		<c:forEach var="cn" items="${categoryList}">
-			<a href="${pageContext.request.contextPath}/IndexController?categoryName=${cn}">${cn}</a>
-		</c:forEach>
-	</div>
-	<table border="1">
-		<tr>			
-			<c:set var="j" value="0"></c:set>
-			<c:forEach var="ebook" items="${ebookList}">
-				<c:set var="j" value="${j+1}"></c:set>
-					<td>
-						<div><img src="${pageContext.request.contextPath}/img/default.jpg"></div>
-						<!-- EbookOneController -EbookDao.selectEbookOne() - ebookOne.jsp -->
-						<div>
-							<a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${ebook.ebookNo}">
-								${ebook.ebookTitle}
-							</a>
-						</div>
-						<div>${ebook.ebookPrice}</div>
-					</td>	
-				<c:if test="${j%5 == 0 }">
-					</tr><tr>
-				</c:if>			
-			</c:forEach>
-				
-		</tr>
-	</table>
-
-	<div><!--  검색창 -->
-		<form action="${pageContext.request.contextPath}/IndexController" method="get">
-			검색 : <input type="text" name="searchWord">
-			<button type="submit">검색</button>
-		</form>
 	
+	<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+		<h2>Ebook List</h2>
 	</div>
-	<div><!-- 10단위 페이징-->
-		<!--  총 페이지가 10페이지 이하일 때 -->
-		<c:if test="${lasPage<=10}">
-			<c:forEach var="i" begin="${1}" end="${lastPage}" step="1">
-				<a href="${pageContext.request.contextPath}/IndexController?currentPage=${i}&categoryName=${categoryName}&searchWord=${searchWord}">${i}</a>
-			</c:forEach>
-		</c:if>
-				
-		<!-- 현재  보는 페이지가 10 이하이고 총 페이지는 10초과일 때 이전버튼을 없앤다 -->
-		<c:if test="${currentPage <= 10 && lastPage>10}">
-			<c:forEach var="i" begin="${1}" end="${10}" step="1">
-				<a href="${pageContext.request.contextPath}/IndexController?currentPage=${i}&categoryName=${categoryName}&searchWord=${searchWord}">${i}</a>
-			</c:forEach>
-			<a href="${pageContext.request.contextPath}/IndexController?currentPage=${11}&categoryName=${categoryName}&searchWord=${searchWord}">다음</a>
-		</c:if>
-					
-		<!-- 11페이지 이상이고  마지막 페이지 블럭 전 까지	 -->
-		<c:if test="${currentPage >= 11 && currentPage<=(lastPageBlockNum)*10}">
-			<a href="${pageContext.request.contextPath}/IndexController?currentPage=${(currentPageBlockNum-1)*10+1}&categoryName=${categoryName}&searchWord=${searchWord}">이전</a>
-			<c:forEach var="i" begin="${(currentPageBlockNum)*10+1}" end="${(currentPageBlockNum)*10+10}" step="1">
-				<a href="${pageContext.request.contextPath}/IndexController?currentPage=${i}&categoryName=${categoryName}&searchWord=${searchWord}">${i}</a>
-			</c:forEach>
-			<a href="${pageContext.request.contextPath}/IndexController?currentPage=${(currentPageBlockNum+1)*10+1}&categoryName=${categoryName}&searchWord=${searchWord}">다음</a>
-		</c:if>
+	<nav class="navbar navbar-expand-sm bg-light justify-content-center" role="navigation">	
+		<div class="container">
+			<div class="row">									
+				<!-- 카테고리 -->
+				<div>
+					<ul class="nav">
+						<li class="nav-link">
+							<a href="${pageContext.request.contextPath}/IndexController" class="nav-link active">전체보기</a>
+						</li>
+						<c:forEach var="cn" items="${categoryList}">
+							<li class="nav-link">
+								<a href="${pageContext.request.contextPath}/IndexController?categoryName=${cn}" class="nav-link active">${cn}</a>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>	
+		</div>		
+	</nav>
+	<br>		
+	<div>			
+		<div>	
+			<div class="row row-pb-md">					
+				<c:set var="i" value="0"></c:set>
+				<c:forEach var="e" items="${ebookList}">	
+				<c:if test="${i%5 == 0 }">
+					<div class="col-lg-1 mb-4 text-center"></div>	
+				</c:if>	
+					<div class="col-lg-2 mb-4 text-center">
+						<div class="product-entry border">
+							<a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${e.ebookNo}" class="prod-img">
+								<img src="${pageContext.request.contextPath}/img/default.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+							</a>
+							<div class="desc">
+								<h2><a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${e.ebookNo}">${e.ebookTitle}</a></h2>
+							</div>	
+							<div>
+								<span class="price">￦ ${e.ebookPrice}</span>
+							</div>							
+						</div>							
+					</div>					
+				<c:set var="i" value="${i+1}"></c:set>		
+				<c:if test="${i%5 == 0 }">
+					<div class="col-lg-1 mb-4 text-center"></div>	
+				</c:if>															
+				</c:forEach>
+			</div>
+		</div>
+	</div>
 
-		<!-- 마지막 페이지 블럭이 있는곳-->
-		<c:if test="${currentPageBlockNum == lastPageBlockNum1}">
-			<a href="${pageContext.request.contextPath}/IndexController?currentPage=${(currentPageBlockNum-1)*10+1}&categoryName=${categoryName}&searchWord=${searchWord}">이전</a>
-			<c:forEach var="i" begin="${(currentPageBlockNum)*10+1}" end="${lastPage}" step="1">
-				<a href="${pageContext.request.contextPath}/IndexController?currentPage=${i}&categoryName=${categoryName}&searchWord=${searchWord}">${i}</a>
-			</c:forEach>
-		</c:if>
+	<div class="row">
+		<div class="col-md-12 text-center"><!-- 10단위 페이징-->
+			<div class="block-27">
+				<!--  총 페이지가 10페이지 이하일 때 -->
+				<c:if test="${lastPage<=10}">
+					<ul>
+						<c:forEach var="i" begin="${1}" end="${lastPage}" step="1">				
+							<li>
+								<a href="${pageContext.request.contextPath}/IndexController?currentPage=${i}&categoryName=${categoryName}&searchWord=${searchWord}">${i}</a>
+							</li>				
+						</c:forEach>
+					</ul>
+				</c:if>
+						
+				<!-- 현재  보는 페이지가 10 이하이고 총 페이지는 10초과일 때 이전버튼을 없앤다 -->
+				<c:if test="${currentPage <= 10 && lastPage>10}">
+					<ul>
+						<c:forEach var="i" begin="${1}" end="${10}" step="1">				
+							<li>
+								<a href="${pageContext.request.contextPath}/IndexController?currentPage=${i}&categoryName=${categoryName}&searchWord=${searchWord}">${i}</a>
+							</li>					
+						</c:forEach>			
+						<li>
+							<a href="${pageContext.request.contextPath}/IndexController?currentPage=${11}&categoryName=${categoryName}&searchWord=${searchWord}"><i class="ion-ios-arrow-forward"></i></a>
+						</li>
+					</ul>
+				</c:if>
+							
+				<!-- 11페이지 이상이고  마지막 페이지 블럭 전 까지	 -->
+				<c:if test="${currentPage >= 11 && currentPage<=(lastPageBlockNum)*10}">
+					<ul>
+						<li>
+							<a href="${pageContext.request.contextPath}/IndexController?currentPage=${(currentPageBlockNum-1)*10+1}&categoryName=${categoryName}&searchWord=${searchWord}"><i class="ion-ios-arrow-back"></i></a>
+						</li>
+						<c:forEach var="i" begin="${(currentPageBlockNum)*10+1}" end="${(currentPageBlockNum)*10+10}" step="1">
+							<li>
+								<a href="${pageContext.request.contextPath}/IndexController?currentPage=${i}&categoryName=${categoryName}&searchWord=${searchWord}">${i}</a>
+							</li>
+						</c:forEach>
+						<li>
+							<a href="${pageContext.request.contextPath}/IndexController?currentPage=${(currentPageBlockNum+1)*10+1}&categoryName=${categoryName}&searchWord=${searchWord}"><i class="ion-ios-arrow-forward"></i></a>
+						</li>
+					</ul>
+				</c:if>
 		
+				<!-- 마지막 페이지 블럭이 있는곳-->
+				<c:if test="${currentPageBlockNum == lastPageBlockNum1 && lastPage>10}">
+					<ul>
+						<li>
+							<a href="${pageContext.request.contextPath}/IndexController?currentPage=${(currentPageBlockNum-1)*10+1}&categoryName=${categoryName}&searchWord=${searchWord}"><i class="ion-ios-arrow-back"></i></a>
+						</li>
+						<c:forEach var="i" begin="${(currentPageBlockNum)*10+1}" end="${lastPage}" step="1">
+							<li>	
+								<a href="${pageContext.request.contextPath}/IndexController?currentPage=${i}&categoryName=${categoryName}&searchWord=${searchWord}">${i}</a>
+							</li>				
+						</c:forEach>
+					</ul>
+				</c:if>			
+			</div>
+		</div>
 	</div>
-		<div class="gototop js-top">
+		
+	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>
 	</div>
+	
+	<footer id="colorlib-footer" role="contentinfo">	
+		<div class="copy">
+			<div class="row">
+				<div class="col-sm-12 text-center">
+					<p>
+						<span>Copyright JaeBoem-L all rights reserved.</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 	
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>

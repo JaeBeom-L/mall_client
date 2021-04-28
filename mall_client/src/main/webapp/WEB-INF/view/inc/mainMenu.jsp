@@ -2,22 +2,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- 상단 메인 메뉴 -->
 	<c:if test="${loginClient == null}">
-		<form action="${pageContext.request.contextPath}/LoginController" method="post">
-			ID : <input type = "text" name = "clientMail">
-			PW : <input type = "password" name = "clientPw">
-			<button type="submit">로그인</button>
-		</form>	
 		<nav class="colorlib-nav" role="navigation">
 			<div class="top-menu">
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-7 col-md-9">
-							<div id="colorlib-logo"><a href="index.html">EbookStore</a></div>
+							<div id="colorlib-logo"><a href="${pageContext.request.contextPath}/IndexController">EbookStore</a></div>
 						</div>
 						<div class="col-sm-5 col-md-3">
-			            <form action="#" class="search-wrap">
+			            <form action="${pageContext.request.contextPath}/IndexController" class="search-wrap" method="get">
 			               <div class="form-group">
-			                  <input type="search" class="form-control search" placeholder="Search">
+			                  <input type="text" name="searchWord" class="form-control search" placeholder="Search Ebook">
 			                  <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
 			               </div>
 			            </form>
@@ -76,32 +71,31 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-sm-7 col-md-9">
-							<div id="colorlib-logo"><a href="index.html">EbookStore</a></div>
+							<div id="colorlib-logo"><a href="${pageContext.request.contextPath}/IndexController">EbookStore</a></div>
 						</div>
 						<div class="col-sm-5 col-md-3">
-			            <form action="#" class="search-wrap">
+			            <form action="${pageContext.request.contextPath}/IndexController" class="search-wrap">
 			               <div class="form-group">
-			                  <input type="search" class="form-control search" placeholder="Search">
+			                  <input type="search" class="form-control search" placeholder="Search" name="searchWord">
 			                  <button class="btn btn-primary submit-search text-center" type="submit"><i class="icon-search"></i></button>
 			               </div>
 			            </form>
 			         </div>
 		         </div>
 		         <div>
-		         	${loginClient.clientMail}님 반갑습니다.
+		         	${loginClient.clientMail}님 반갑습니다.&nbsp;&nbsp; <a href="${pageContext.request.contextPath}/LogoutController">로그아웃</a>
 		         </div>
 					<div class="row">
 						<div class="col-sm-12 text-left menu-1">
 							<ul>
 								<!-- InsertClientController -> /view/insertClient.jsp -->
 								<li><a href="${pageContext.request.contextPath}/IndexController">홈으로</a>
-								<li><a href="${pageContext.request.contextPath}/LogoutController">로그아웃</a></li>
 								<!-- ClientOneController -> ClientDao.selectclientOne() -> /view/client/clientOne.jsp-->
 								<li><a href="${pageContext.request.contextPath}/ClientOneController">회원정보</a></li>
-								<li><a href="${pageContext.request.contextPath}/CartListController">장바구니</a></li>
 								<!-- OrdersListController - OrdersDao.selectOrdersListByClient()-OrdersList.jsp -->
 								<li><a href="${pageContext.request.contextPath}/OrdersListController">주문리스트</a></li>
 								<li><a href ="${pageContext.request.contextPath}/EbookCalendarController">ebook달력</a></li>
+								<li class="cart"><a href="${pageContext.request.contextPath}/CartListController"><i class="icon-shopping-cart"></i> Cart</a></li>
 							</ul>
 						</div>
 					</div>
