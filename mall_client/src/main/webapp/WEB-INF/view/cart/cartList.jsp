@@ -41,31 +41,70 @@
 	<!-- mainMenu -->
 	<jsp:include page="/WEB-INF/view/inc/mainMenu.jsp"></jsp:include>
 	<!-- cartList -->
-	<table border="1">
-			<tr>
-				<th>cart_no</th>
-				<th>ebook_no</th>
-				<th>ebook_title</th>
-				<th>cart_date</th>
-				<th>삭제</th>
-				<th>주문</th>
-			</tr>
-		
-		<c:forEach var="m" items="${list}">
-				<tr>
-					<td>${m.cartNo}</td>
-					<td>${m.ebookNo}</td>
-					<td>${m.ebookTitle}</td>
-					<td>${m.cartDate}</td>
-					<!-- DeleteCartController - CartDao.deleteCart() - redirect CartListController -->
-					<td><a href="${pageContext.request.contextPath}/DeleteCartController?cartNo=${m.cartNo}">삭제</a></td>
-					<!-- InsertOrdersController - insertOrders(),deleteCart():issue(트랙잭션 필요)- redirect OrdersListController -->
-					<td><a href="${pageContext.request.contextPath}/InsertOrdersController?ebookNo=${m.ebookNo}&cartNo=${m.cartNo}">주문</a></td>
-				</tr>
-		</c:forEach>
-
-	</table>
-	
+	<div class="colorlib-product">
+		<div class="container">
+			<h2>CartList</h2>
+					<div class="row row-pb-lg">
+					<div class="col-md-12">
+						<div class="product-name d-flex">
+							<div class="one-forth text-center">
+								<span>cartNo</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>ebookNo</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>ebookTitle</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>cartDate</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>삭제</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>주문</span>
+							</div>
+						</div>
+						
+					<c:forEach var="m" items="${list}">	
+						<div class="product-cart d-flex">
+							<div class="one-forth text-center">
+								<div class="display-tc">
+									<span class="price">${m.cartNo}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">${m.ebookNo}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">${m.ebookTitle}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">${m.cartDate}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<a href="${pageContext.request.contextPath}/DeleteCartController?cartNo=${m.cartNo}" class="closed"></a>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<button type="button" class="btn"><a href="${pageContext.request.contextPath}/InsertOrdersController?ebookNo=${m.ebookNo}&cartNo=${m.cartNo}">주문</a></button>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
 	<footer id="colorlib-footer" role="contentinfo">	
 		<div class="copy">
 			<div class="row">
