@@ -41,28 +41,71 @@
 
 	<jsp:include page="/WEB-INF/view/inc/mainMenu.jsp"></jsp:include>
 	<!-- 메뉴1 -->
-	<h1>주문리스트</h1>
-	<table border="1">
-		<tr>
-			<td>ordersNo</td>
-			<td>ebookNo</td>
-			<td>ordersDate</td>
-			<td>ordersState</td>
-			<td>ebookTitle</td>
-			<td>ebookPrice</td>
-		</tr>
-		<c:forEach var="m" items="${ordersList}">
-			<tr>
-				<td>${m.ordersNo}</td>
-				<td>${m.ebookNo}</td>
-				<td>${m.ordersDate}</td>
-				<td>${m.ordersState}</td>
-				<td>${m.ebookTitle}</td>
-				<td>${m.ebookPrice}</td>
-			</tr>
-		</c:forEach>
-	
-	</table>
+
+	<div class="colorlib-product">
+		<div class="container">
+			<h2>OrdersList</h2>
+					<div class="row row-pb-lg">
+					<div class="col-md-12">
+						<div class="product-name d-flex">
+							<div class="one-forth text-center">
+								<span>ordersNo</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>ebookNo</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>ordersDate</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>ordersState</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>ebookTitle</span>
+							</div>
+							<div class="one-eight text-center">
+								<span>ebookPrice</span>
+							</div>
+						</div>
+						
+					<c:forEach var="m" items="${ordersList}">	
+						<div class="product-cart d-flex">
+							<div class="one-forth text-center">
+								<div class="display-tc">
+									<span class="price">${m.ordersNo}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">${m.ebookNo}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">${m.ordersDate}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">${m.ordersState}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">${m.ebookTitle}</span>
+								</div>
+							</div>
+							<div class="one-eight text-center">
+								<div class="display-tc">
+									<span class="price">${m.ebookPrice}</span>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
 	
 	<footer id="colorlib-footer" role="contentinfo">	
 		<div class="copy">
