@@ -77,7 +77,7 @@
 					
 					<c:if test="${i-(firstDayOfWeek-1)>0 }">
 						<td>
-							<div>${i-(firstDayOfWeek-1)}</div>
+							<div><h6>${i-(firstDayOfWeek-1)}</h6></div>
 							<c:forEach var="m" items="${ebookListByMonth}">
 								<c:if test="${(i-(firstDayOfWeek-1)) == m.d}">
 									<div>

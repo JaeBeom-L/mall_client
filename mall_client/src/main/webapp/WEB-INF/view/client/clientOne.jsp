@@ -41,31 +41,70 @@
 
 	<jsp:include page="/WEB-INF/view/inc/mainMenu.jsp"></jsp:include>
 	<!-- 메뉴1 -->
-	
-	<h1>고객정보</h1>
-	<table border="1">
-		<tr>
-			<td>clientNo</td>
-			<td>${client.clientNo}</td>
-		</tr>
+	<div class="container">		
+		<h2>고객정보</h2>
+		<table border="1" class="table table-bordered">
+			<tr>
+				<td>clientNo</td>
+				<td>${client.clientNo}</td>
+			</tr>
+			
+			<tr>
+				<td>clientMail</td>
+				<td>${client.clientMail}</td>
+			</tr>
+			
+			<tr>
+				<td>clientDate</td>
+				<td>${client.clientDate}</td>
+			</tr>
+		</table>
 		
-		<tr>
-			<td>clientMail</td>
-			<td>${client.clientMail}</td>
-		</tr>
-		
-		<tr>
-			<td>clientDate</td>
-			<td>${client.clientDate}</td>
-		</tr>
-	</table>
-	
-	<!-- UpdateClientPasswordController.doGet - updateClientPw.jsp>
-	<!-- UpdateClientPasswordController.doPost - ClientDao.updateClientPassword() - redirect:/Index -->
-	<a href="${pageContext.request.contextPath}/UpdateClientPasswordController">정보수정</a>
-	<!-- DeleteClientController - ClientDao.deleteClient() - session.invalidate() -->
-	<a href="${pageContext.request.contextPath}/DeleteClientController">회원탈퇴</a>
-	
+		<!-- UpdateClientPasswordController.doGet - updateClientPw.jsp>
+		<!-- UpdateClientPasswordController.doPost - ClientDao.updateClientPassword() - redirect:/Index -->
+		<button class="btn" data-toggle="modal" data-target="#updateClientModal">
+			정보수정
+		</button>
+		<!-- DeleteClientController - ClientDao.deleteClient() - session.invalidate() -->
+		<button class="btn">
+			<a href="${pageContext.request.contextPath}/DeleteClientController">회원탈퇴</a>
+		</button>
+				
+		  <!-- The Modal -->
+		  <div class="modal" id="updateClientModal">
+		    <div class="modal-dialog">
+		      <div class="modal-content">
+		      
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h4 class="modal-title">패스워드 변경</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        
+		        <form method="post" action="${pageContext.request.contextPath}/UpdateClientPasswordController">
+			        <!-- Modal body -->
+			        <div class="modal-body">		          
+						<table border="1" class="table table-bordered">				
+							<tr>
+								<td>clientMail</td>
+								<td>${loginClient.clientMail}</td>
+							</tr>
+							
+							<tr>
+								<td>clientPw</td>
+								<td><input type="password" name="clientPw" class="form-control"></td>
+							</tr>					
+						</table>			
+			        </div>		        	
+			        <!-- Modal footer -->
+			        <div class="modal-footer">
+			          <button type="submit" class="btn">수정</button>
+			        </div>
+		        </form>		        
+		      </div>
+		    </div>
+		  </div>
+	</div>
 	<footer id="colorlib-footer" role="contentinfo">	
 		<div class="copy">
 			<div class="row">
