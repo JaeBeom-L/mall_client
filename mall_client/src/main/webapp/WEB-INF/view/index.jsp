@@ -56,7 +56,10 @@
 						<div>PW :</div> 
 						<input type = "password" name = "clientPw" class="form-control">
 					</div>
-					<button type="submit" class="btn btn-primary submit-search text-center">로그인</button>
+					<div class="row">
+						<button type="submit" class="btn btn-primary submit-search text-center">로그인</button>
+						<button type="button" class="btn btn-primary submit-search text-center" data-toggle="modal" data-target="#insertClientModal">회원가입</button>
+					</div>
 				</form>	
 			</c:if>
 		</div>
@@ -212,6 +215,40 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- The Modal -->
+	<div class="modal" id="insertClientModal">
+	 	 <div class="modal-dialog">
+		      <div class="modal-content">		      
+		        <!-- Modal Header -->
+		        <div class="modal-header">
+		          <h4 class="modal-title">회원가입</h4>
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		        </div>
+		        
+		        <form method="post" action="${pageContext.request.contextPath}/InsertClientController">
+			        <!-- Modal body -->
+			        <div class="modal-body">		          
+						<table border="1" class="table table-bordered">				
+							<tr>
+								<td>clientMail</td>
+								<td><input type="text" name="clientMail" class="form-control"></td>
+							</tr>
+							
+							<tr>
+								<td>clientPw</td>
+								<td><input type="password" name="clientPw" class="form-control"></td>
+							</tr>					
+						</table>			
+			        </div>		        	
+			        <!-- Modal footer -->
+			        <div class="modal-footer">
+			          <button type="submit" class="btn">회원가입</button>
+			        </div>
+		        </form>		        
+		      </div>
+		</div>
+	</div>	
 		
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="ion-ios-arrow-up"></i></a>

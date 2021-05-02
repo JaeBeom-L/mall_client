@@ -24,7 +24,6 @@
 							<ul>
 								<!-- InsertClientController -> /view/insertClient.jsp -->
 								<li><a href="${pageContext.request.contextPath}/IndexController">홈으로</a>
-								<li><a href = "${pageContext.request.contextPath}/InsertClientController">회원가입</a></li>
 								<li><a href = "${pageContext.request.contextPath}/EbookCalendarController">ebook달력</a></li>
 							</ul>
 						</div>		
