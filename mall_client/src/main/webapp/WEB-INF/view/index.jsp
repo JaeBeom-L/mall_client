@@ -50,11 +50,11 @@
 				<form action="${pageContext.request.contextPath}/LoginController" method="post">
 					<div class="row">
 						<div>ID :</div> 
-						<input type = "text" name = "clientMail" class="form-control">
+						<input type = "text" name = "clientMail" class="form-control" value="test@gmail.com">
 					</div>
 					<div class="row">
 						<div>PW :</div> 
-						<input type = "password" name = "clientPw" class="form-control">
+						<input type = "password" name = "clientPw" class="form-control" value="1234">
 					</div>
 					<div class="row">
 						<button type="submit" class="btn btn-primary submit-search text-center">로그인</button>
@@ -81,14 +81,16 @@
 				</div>
 				<c:forEach var="m" items="${bestOrdersList}">								
 					<div class="col-lg-2 mb-4 text-center">
-						<div class="product-entry border">
-							<a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${m.ebookNo}" class="prod-img">
-								<img src="${pageContext.request.contextPath}/img/default.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-							</a>
-							<div class="desc">
-								<h2><a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${m.ebookNo}">${m.ebookTitle}</a></h2>
+						<div class="card">
+							<div class="card-header">
+								<a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${m.ebookNo}" class="prod-img">
+									<img src="${pageContext.request.contextPath}/img/default.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+								</a>
+							</div>
+							<div class="card-body" style="height:100px">
+								<h6><a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${m.ebookNo}">${m.ebookTitle}</a></h6>
 							</div>	
-							<div>
+							<div class="card-footer">
 								<span class="price">￦ ${m.ebookPrice}</span>
 							</div>							
 						</div>							
@@ -133,14 +135,16 @@
 					<div class="col-lg-1 mb-4 text-center"></div>	
 				</c:if>	
 					<div class="col-lg-2 mb-4 text-center">
-						<div class="product-entry border">
-							<a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${e.ebookNo}" class="prod-img">
-								<img src="${pageContext.request.contextPath}/img/default.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
-							</a>
-							<div class="desc">
-								<h2><a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${e.ebookNo}">${e.ebookTitle}</a></h2>
+						<div class="card">
+							<div class="card-header">
+								<a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${e.ebookNo}" class="prod-img">
+									<img src="${pageContext.request.contextPath}/img/default.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+								</a>
+							</div>
+							<div class="card-body" style="height: 100px">
+								<h6><a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${e.ebookNo}">${e.ebookTitle}</a></h6>
 							</div>	
-							<div>
+							<div class="card-footer">
 								<span class="price">￦ ${e.ebookPrice}</span>
 							</div>							
 						</div>							

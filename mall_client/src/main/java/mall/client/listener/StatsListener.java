@@ -16,7 +16,7 @@ public class StatsListener implements HttpSessionListener {
 	    	System.out.println("새로운 세션이 생성 되었습니다.");
 	    	
 	    	this.statsDao = new StatsDao();
-	    	if(this.statsDao.selectStatsByToday() == null) {
+	    	if(this.statsDao.selectStatsByToday().getStats_day() == null) {
 	    		System.out.println(this.statsDao.selectStatsByToday());
 	    		this.statsDao.insertStats();
 	    	}else {
