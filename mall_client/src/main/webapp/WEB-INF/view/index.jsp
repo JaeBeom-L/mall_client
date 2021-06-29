@@ -84,7 +84,7 @@
 						<div class="card">
 							<div class="card-header">
 								<a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${m.ebookNo}" class="prod-img">
-									<img src="${pageContext.request.contextPath}/img/default.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+									<img src="${pageContext.request.contextPath}/img/${m.ebookNo}.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
 								</a>
 							</div>
 							<div class="card-body" style="height:100px">
@@ -138,7 +138,7 @@
 						<div class="card">
 							<div class="card-header">
 								<a href="${pageContext.request.contextPath}/EbookOneController?ebookNo=${e.ebookNo}" class="prod-img">
-									<img src="${pageContext.request.contextPath}/img/default.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
+									<img src="${pageContext.request.contextPath}/img/${e.ebookNo}.jpg" class="img-fluid" alt="Free html5 bootstrap 4 template">
 								</a>
 							</div>
 							<div class="card-body" style="height: 100px">
